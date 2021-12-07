@@ -130,8 +130,12 @@ public class HibernateHelper {
 		}
 		
 		if (!rowsList.isEmpty()){
-			sqlSourceHelper.setCurrentIndex(Integer.toString((Integer.parseInt(sqlSourceHelper.getCurrentIndex())
-					+ rowsList.size())));
+//			sqlSourceHelper.setCurrentIndex(Integer.toString((Integer.parseInt(sqlSourceHelper.getCurrentIndex())
+//					+ rowsList.size())));
+			// TODO 注释：解决长整型处理报错问题，要求查询最后一个字段是条件字段
+			List<Object> ofileds = rowsList.get(rowsList.size() - 1);
+			Object endfiled = ofileds.get(ofileds.size() - 1);
+			sqlSourceHelper.setCurrentIndex(endfiled.toString());
 		}
 		
 		return rowsList;
